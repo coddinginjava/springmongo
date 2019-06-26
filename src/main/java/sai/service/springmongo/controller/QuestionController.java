@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import sai.service.springmongo.model.Question;
 import sai.service.springmongo.repository.QuestionRepository;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +18,9 @@ public class QuestionController {
 
     @PostMapping("/add")
     public String saveQuestions(@RequestBody Question question){
+        question.setCreatedTimeStamp(OffsetDateTime.now().toString());
         questionRepository.save(question);
-
-        System.out.println();
         return "Questions inserted";
-
     }
 
     @GetMapping("/get/all")
@@ -45,6 +44,11 @@ public class QuestionController {
     public String deletell_recorde(){
         questionRepository.deleteAll();
         return "all Deleted";
+    }
+
+    @GetMapping("/get/tsubjectName/{subjectnme}")
+    public List<Question> getBySubjectNmea(@PathVariable String subjectnme){
+        return questionRepository.findBySubjectName(subjectnme);
     }
 
 }
