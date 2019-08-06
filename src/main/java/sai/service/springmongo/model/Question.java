@@ -1,29 +1,16 @@
 package sai.service.springmongo.model;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import java.time.OffsetDateTime;
 import java.util.List;
 
-@Data
-@Document(collection = "QuestionAndAnswer")
-public class Question {
+import lombok.Data;
+import sai.service.springmongo.model.core.QuestionAnswerCore;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private String  id;
+@Data
+public class Question {
+	
     private String peosnId;
     private String subjectName;
     private String testName;
-    private String question;
-    private String optionA;
-    private String optionB;
-    private String optionC;
-    private String optionD;
-    private List<String> answer;
+    private List<QuestionAnswerCore> questionAnswerCore;
     private String createdTimeStamp;
 }
